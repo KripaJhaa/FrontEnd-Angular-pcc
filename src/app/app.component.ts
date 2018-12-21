@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { BehaviorSubject } from '../../node_modules/rxjs';
 import { Observable } from 'rxjs';
@@ -16,30 +16,23 @@ import { Model } from './stateModel';
 })
 
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'FE-PCC-check';
-  typeOfdocuments = ["Aadhar_card", "Voter_Card", "Passport", "ration_Card", "Electricity_Bill"]
-  states: StateList[];
-  city: CityList;
+  typeOfdocuments = ["Aadhar_card", "Voter_Card", "Passport", "ration_Card", "Electricity_Bill"];
+  statesObj = ["Andaman and Nicobar Islands", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chandigarh", "Chhattisgarh", "Dadra and Nagar Haveli", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Karnatka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Puducherry", "Punjab", "Rajasthan", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal"];
+
+  cityObj = new CityList();
   model = new Model();
-  state: string
+  cityList: string[];
+
+  ngOnInit() { }
+
   constructor(private stateService: stateService) { }
 
-
-  async getStates() {
-    if (!this.states) {
-      await this.stateService.getSateList().subscribe((res) => {
-        this.states = res;
-      })
-    }
-  }
   async getCity() {
-    console.log(this.model.state)
-    if (!this.model && this.model.state) {
-      this.state = this.model.state;
-      await this.stateService.getCityList(this.state).subscribe((res) => {
-        this.city = res;
-        console.log("asd" + res)
+    if (this.model && this.model.state) {
+      await this.stateService.getCityList(this.model.state).subscribe((res) => {
+        this.cityObj = res;
       })
     }
   }

@@ -9,41 +9,37 @@
     <div class="card-body">
       <h4 class="card-title">Form</h4>
       <div class="container">
-        <form>
+        <form action="/">
           <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="hey"
-              placeholder="Enter email">
+              placeholder="Enter email" required>
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" readonly>
           </div>
           <div class="form-group">
             <label for="states">States</label>
-            <select class="form-control form-control-sm" [(ngModel)]="model.state" (click)="getStates()" name="states"
+            <select class="form-control form-control-sm" [(ngModel)]="model.state" (change)="getCity()" name="states"
               id="states">
-              <option *ngFor="let item of states" [value]="item.state">{{item.state}}</option>
+              <option *ngFor="let item of statesObj" [value]="item">{{item}}</option>
             </select>
           </div>
-          <div *ngIf="model">{{model.state}}</div>
           <div class="form-group">
             <label for="cities">Cities</label>
-            <select class="form-control form-control-sm" [(ngModel)]="model.city" (click)="getCity()" name="cities" id="cities">
-              <option *ngFor="let item of city" [value]="item.city">{{item.city}}</option>
+            <select class="form-control form-control-sm" [(ngModel)]="model.city" name="cities" id="cities">
+              <option *ngFor="let item of cityObj.city" [value]="item1">{{item}}</option>
             </select>
           </div>
 
           <div class="form-group">
             <label for="Document">Document Type</label>
-            <select class="form-control form-control-sm" name="states" id="Document">
+            <select class="form-control form-control-sm" name="states" id="Document" required>
               <option *ngFor="let i of typeOfdocuments">{{i}}</option>
             </select>
           </div>
-
-
-
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 

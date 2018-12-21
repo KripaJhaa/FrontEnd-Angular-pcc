@@ -3,7 +3,7 @@ export class StateList {
 }
 
 export class CityList {
-    id: string
+    _id: string
     state: string
     city: string[]
 }

@@ -18,11 +18,11 @@ export class stateService {
     constructor(private http: HttpClient) { }
 
     getSateList() {
-        return this.http.post<StateList[]>('http://localhost:8802/state', httpOptions);
+        return this.http.post<string[]>('http://localhost:8802/state', httpOptions);
     }
     getCityList(state: string) {
         console.log('posting city')
-        return this.http.post<CityList>('http://localhost:8802/city', { state }, httpOptions);
+        return this.http.post<CityList>('http://localhost:8802/cities', { state }, httpOptions);
     }
 }
 
